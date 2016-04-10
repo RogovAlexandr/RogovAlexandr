@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Курсы валют</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script src="js/app.js"></script> 
+    <script src="xdk/init-dev.js"></script> 
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<script>
+$(document).ready(function(){
+  $.get("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22USDRUB%22%2C%22EURRUB%22%2C%22GBPRUB%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=").done(function(data){
+
+    var test = $('#test');
+    $(data.query.results.rate).each(function(i, item) {
+      test.append(item.Name + ': '+ item.Rate +  '<br />')
+    });	
+  });
+});
+</script>  
+     <h1 class="text-center" id="test"/>
+<script>
+setInterval(function() {
+  location.reload();
+}, 300000);
+</script>
+</body>
+</html>
